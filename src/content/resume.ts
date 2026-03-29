@@ -117,6 +117,17 @@ export const education = {
   honors: "Dean's List, 3.4 GPA",
 };
 
+export const community = [
+  {
+    label: "FIRST LEGO League Robotics Coach",
+    organization: "Camels Hump Coders",
+    url: "https://camelshumpcoders.org/",
+    period: "2023 – Present",
+    description:
+      "Coaching my son's FLL robotics team for three years, teaching them to code—first in block-based languages, then in Python with Pybricks. The team placed 2nd at the Vermont State Championship in 2025, attended the Sunshine Invitational in Florida, won 1st place at States in 2026, and is headed to the FIRST LEGO League World Championship in Houston in April 2026.",
+  },
+];
+
 export const skills = [
   "NodeJS",
   "React",

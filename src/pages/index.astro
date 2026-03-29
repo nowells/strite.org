@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LeafDivider from '../components/LeafDivider.astro';
-import { profile, experience, contributions, education, skills } from '../content/resume';
+import { profile, experience, contributions, community, education, skills } from '../content/resume';
 ---
 
 <BaseLayout>
@@ -105,6 +105,25 @@ import { profile, experience, contributions, education, skills } from '../conten
           <h4>{c.label}</h4>
           <p>{c.description}</p>
         </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Community -->
+  <section class="section container">
+    <p class="label">Community</p>
+    <div class="community-grid">
+      {community.map((c) => (
+        <div class="community-card">
+          <div class="community-header">
+            <h3>{c.label}</h3>
+            <span class="community-period">{c.period}</span>
+          </div>
+          <p class="community-org">
+            <a href={c.url} target="_blank" rel="noopener">{c.organization}</a>
+          </p>
+          <p>{c.description}</p>
+        </div>
       ))}
     </div>
   </section>
@@ -218,6 +237,47 @@ import { profile, experience, contributions, education, skills } from '../conten
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: var(--space-md);
     margin-top: var(--space-lg);
+  }
+
+  /* Community */
+  .community-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+    max-width: 750px;
+  }
+
+  .community-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: var(--space-lg);
+  }
+
+  .community-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--space-sm);
+  }
+
+  .community-header h3 {
+    margin: 0;
+  }
+
+  .community-period {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+
+  .community-org {
+    margin-bottom: var(--space-md);
+    font-size: 0.95rem;
+  }
+
+  .community-org a {
+    color: var(--color-accent);
   }
 
   /* Skills */
