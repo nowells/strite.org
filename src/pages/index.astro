@@ -1,0 +1,260 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LeafDivider from '../components/LeafDivider.astro';
+import { profile, experience, contributions, education, skills } from '../content/resume';
+---
+
+<BaseLayout>
+  <!-- Hero -->
+  <section class="hero container">
+    <div class="hero-bg" aria-hidden="true">
+      <svg viewBox="0 0 800 400" class="hero-blob">
+        <path
+          d="M400,50 C550,20 750,100 700,200 C650,300 550,380 400,350 C250,320 50,300 100,200 C150,100 250,80 400,50Z"
+          fill="var(--color-accent)"
+        />
+      </svg>
+    </div>
+
+    <p class="label fade-up">{profile.location}</p>
+
+    <h1 class="hero-heading fade-up fade-up-delay-1">
+      Crafting technology<br />
+      <em>with intention</em>
+    </h1>
+
+    <p class="hero-summary fade-up fade-up-delay-2">
+      {profile.summary}
+    </p>
+
+    <LeafDivider />
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section container">
+    <p class="label">About</p>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm a web technologist living in beautiful {profile.location}, where I've found
+          a confluence between creating innovative technology solutions and pursuing a love
+          for rural living and outdoor enjoyment.
+        </p>
+        <p>
+          With over 20 years in the industry—from leading educational technology at PBS
+          to architecting cloud infrastructure at Oracle—I care deeply about building
+          systems that are both powerful and thoughtfully designed.
+        </p>
+        <p>
+          I'm a strong proponent of open source and have contributed back to many of the
+          projects I work with. You can find my work on
+          <a href={profile.github} target="_blank" rel="noopener">GitHub</a>.
+        </p>
+      </div>
+      <div class="about-details">
+        <div class="detail-block">
+          <span class="label">Education</span>
+          <p class="detail-value">{education.degree}</p>
+          <p class="detail-sub">{education.school}, {education.period}</p>
+          <p class="detail-sub">{education.honors}</p>
+        </div>
+        <div class="detail-block">
+          <span class="label">Patent</span>
+          <p class="detail-value">
+            <a href={contributions[0].url} target="_blank" rel="noopener">
+              US20200226697A1
+            </a>
+          </p>
+          <p class="detail-sub">{contributions[0].description}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience" class="section container">
+    <p class="label">The Path</p>
+    <div class="timeline">
+      {experience.map((job, i) => (
+        <div class="timeline-item">
+          <div class="timeline-period">{job.period}</div>
+          <div class="timeline-track">
+            <div class={`timeline-node ${i === 0 ? 'active' : ''}`}></div>
+            {i < experience.length - 1 && <div class="timeline-line"></div>}
+          </div>
+          <div class="timeline-content">
+            <h3>{job.company}</h3>
+            <p class="role">{job.title}</p>
+            <ul>
+              {job.highlights.map((h) => (
+                <li>{h}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Open Source Contributions -->
+  <section class="section container">
+    <p class="label">Open Source</p>
+    <div class="contrib-grid">
+      {contributions.slice(1).map((c) => (
+        <a href={c.url} target="_blank" rel="noopener" class="contrib-card">
+          <h4>{c.label}</h4>
+          <p>{c.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="section container">
+    <p class="label">Technologies</p>
+    <div class="skills-row">
+      {skills.map((s, i) => (
+        <span class="pill" style={`animation-delay: ${i * 0.04}s`}>{s}</span>
+      ))}
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section container">
+    <p class="label">Get in Touch</p>
+    <div class="contact-block">
+      <h2>Let's connect</h2>
+      <p>
+        I'm always interested in discussing thoughtful technology, open source,
+        or opportunities at mission-driven organizations.
+      </p>
+      <div class="contact-links">
+        <a href={`mailto:${profile.email}`} class="pill">Email</a>
+        <a href={profile.github} target="_blank" rel="noopener" class="pill">GitHub</a>
+        <a href={profile.linkedin} target="_blank" rel="noopener" class="pill">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .hero {
+    position: relative;
+    padding-top: 80px;
+    padding-bottom: 40px;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    top: -40px;
+    right: -100px;
+    width: 55%;
+    opacity: 0.06;
+    pointer-events: none;
+  }
+
+  .hero-heading {
+    margin-top: 28px;
+    max-width: 600px;
+  }
+
+  .hero-heading em {
+    font-weight: 400;
+    color: var(--color-accent);
+  }
+
+  .hero-summary {
+    font-size: 1.05rem;
+    max-width: 520px;
+    margin-top: 24px;
+  }
+
+  /* About */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: var(--space-2xl);
+    margin-top: var(--space-lg);
+  }
+
+  .about-text p {
+    margin-bottom: var(--space-md);
+  }
+
+  .detail-block {
+    margin-bottom: var(--space-lg);
+  }
+
+  .detail-block .label {
+    margin-bottom: var(--space-sm);
+    display: block;
+  }
+
+  .detail-value {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    color: var(--color-text-primary) !important;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+
+  .detail-sub {
+    font-size: 0.85rem;
+    color: var(--color-text-muted) !important;
+    margin-bottom: 2px;
+  }
+
+  /* Timeline */
+  .timeline {
+    margin-top: var(--space-xl);
+    max-width: 750px;
+  }
+
+  /* Contributions */
+  .contrib-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+  }
+
+  /* Skills */
+  .skills-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: var(--space-lg);
+  }
+
+  /* Contact */
+  .contact-block {
+    margin-top: var(--space-lg);
+    max-width: 500px;
+  }
+
+  .contact-block h2 {
+    margin-bottom: var(--space-md);
+  }
+
+  .contact-block p {
+    margin-bottom: var(--space-lg);
+  }
+
+  .contact-links {
+    display: flex;
+    gap: 12px;
+  }
+
+  @media (max-width: 768px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+    }
+
+    .hero {
+      padding-top: 48px;
+    }
+  }
+</style>

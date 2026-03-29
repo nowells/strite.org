@@ -1,0 +1,226 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { profile, experience, contributions, education, skills } from '../content/resume';
+---
+
+<BaseLayout title="Resume — Nowell Strite" description="Resume of Nowell Strite, Principal Applications Architect at Oracle.">
+  <section class="container resume-page">
+    <div class="resume-header">
+      <div>
+        <h1>{profile.name}</h1>
+        <p class="resume-title">{profile.title}</p>
+      </div>
+      <div class="resume-contact">
+        <p>{profile.location}</p>
+        <p><a href={`mailto:${profile.email}`}>{profile.email}</a></p>
+        <p><a href={profile.github} target="_blank" rel="noopener">github.com/nowells</a></p>
+        <p><a href={profile.linkedin} target="_blank" rel="noopener">LinkedIn</a></p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Experience -->
+    <div class="resume-section">
+      <p class="label">Experience</p>
+      {experience.map((job) => (
+        <div class="resume-job">
+          <div class="job-header">
+            <div>
+              <h3>{job.title}</h3>
+              <p class="job-company">{job.company}</p>
+            </div>
+            <span class="job-period">{job.period}</span>
+          </div>
+          <ul>
+            {job.highlights.map((h) => (
+              <li>{h}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Contributions -->
+    <div class="resume-section">
+      <p class="label">Contributions & Recognition</p>
+      <ul class="contrib-list">
+        {contributions.map((c) => (
+          <li>
+            <a href={c.url} target="_blank" rel="noopener"><strong>{c.label}</strong></a>
+            — {c.description}
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Education -->
+    <div class="resume-section">
+      <p class="label">Education</p>
+      <h3>{education.degree}</h3>
+      <p class="job-company">{education.school}</p>
+      <p class="job-period-inline">{education.period} — {education.honors}</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Skills -->
+    <div class="resume-section">
+      <p class="label">Skills</p>
+      <div class="skills-row">
+        {skills.map((s) => (
+          <span class="pill">{s}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .resume-page {
+    padding-top: var(--space-2xl);
+    padding-bottom: var(--space-2xl);
+    max-width: 800px;
+  }
+
+  .resume-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-xl);
+  }
+
+  .resume-header h1 {
+    font-size: 2.2rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .resume-title {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--color-text-secondary);
+  }
+
+  .resume-contact {
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .resume-contact p {
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+    color: var(--color-text-muted);
+  }
+
+  .resume-section {
+    padding: var(--space-xl) 0;
+  }
+
+  .resume-section .label {
+    margin-bottom: var(--space-lg);
+  }
+
+  .resume-job {
+    margin-bottom: var(--space-xl);
+  }
+
+  .job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-md);
+    gap: var(--space-lg);
+  }
+
+  .job-header h3 {
+    font-size: 1.05rem;
+    margin-bottom: 2px;
+  }
+
+  .job-company {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    font-weight: 400;
+  }
+
+  .job-period {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+    padding-top: 4px;
+  }
+
+  .job-period-inline {
+    font-size: 0.85rem;
+    color: var(--color-text-muted) !important;
+    margin-top: 4px;
+  }
+
+  .resume-job ul,
+  .contrib-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .resume-job li,
+  .contrib-list li {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    font-weight: 300;
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: var(--space-sm);
+  }
+
+  .resume-job li::before,
+  .contrib-list li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--color-text-muted);
+  }
+
+  .skills-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: var(--space-md);
+  }
+
+  @media (max-width: 640px) {
+    .resume-header {
+      flex-direction: column;
+    }
+
+    .resume-contact {
+      text-align: left;
+    }
+
+    .job-header {
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+  }
+
+  @media print {
+    .resume-page {
+      padding: 0;
+    }
+
+    .pill {
+      border: 1px solid #ccc;
+      background: none;
+      color: #333;
+    }
+  }
+</style>
