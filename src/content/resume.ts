@@ -1,6 +1,6 @@
 export const profile = {
   name: "Nowell Strite",
-  title: "Principal Applications Architect",
+  title: "Cloud Architect",
   location: "Huntington, Vermont",
   email: "nowell@strite.org",
   website: "nowell.strite.org",
@@ -8,14 +8,22 @@ export const profile = {
   github: "https://github.com/nowells",
   linkedin: "https://www.linkedin.com/in/nowellstrite",
   summary:
-    "Technology leader with 20+ years building platforms at scale—from public media to energy tech to cloud infrastructure. Rooted in Vermont's Green Mountains, driven by open source values and thoughtful architecture.",
+    "Technology leader with 20+ years building platforms at scale—from public media to energy tech to cloud and GPU-accelerated infrastructure. Rooted in Vermont's Green Mountains, driven by open source values and thoughtful architecture.",
 };
 
 export const experience = [
   {
+    company: "NVIDIA",
+    title: "Cloud Architect (NGC Platform)",
+    period: "April 2021 – Present",
+    highlights: [
+      "Building foundational web technology for the NGC Platform, enabling cloud-native GPU-accelerated services across Omniverse, DriveSIM, and NGC.",
+    ],
+  },
+  {
     company: "Oracle",
     title: "Principal Applications Architect (Web Platform Team)",
-    period: "2017 – Present",
+    period: "2017 – 2021",
     highlights: [
       "Turned an Innovation Day prototype into a critical visual workflow tool for collecting, comparing, publishing, and deploying application configurations across product lines—reducing implementation and setup costs by 50%.",
       "Architected the migration of 50+ customer energy insight widgets from iframes to native custom elements, drastically improving load time and integration experience.",
