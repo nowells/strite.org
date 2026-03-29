@@ -1,0 +1,304 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const experience = [
+  {
+    company: 'WiserTogether',
+    role: 'Principal Engineer',
+    years: '2013 \u2013 Present',
+    description: 'Healthcare decision support tools powered by D3.js visualizations and Django.',
+  },
+  {
+    company: 'Draker Laboratories',
+    role: 'Director of Software Engineering',
+    years: '2011 \u2013 2013',
+    description: 'Solar energy monitoring at scale with Clojure, Cassandra, and RabbitMQ.',
+  },
+  {
+    company: 'PBS',
+    role: 'Senior Manager of Technology Solutions',
+    years: '2005 \u2013 2011',
+    description: 'Educational platforms serving millions of teachers across 40+ sites.',
+  },
+];
+
+const skills = [
+  { label: 'Languages', items: 'Python, Ruby, JavaScript, Clojure, Java' },
+  { label: 'Frameworks', items: 'Django, Rails, React, Backbone.js, Node.js' },
+  { label: 'Data', items: 'PostgreSQL, MySQL, Cassandra, SOLR' },
+  { label: 'Infrastructure', items: 'AWS, Chef, Nginx, CI/CD, Vagrant' },
+];
+
+const links = [
+  { href: 'https://github.com/nowells', label: 'GitHub', icon: 'github' },
+  { href: 'https://linkedin.com/in/nowellstrite', label: 'LinkedIn', icon: 'linkedin' },
+  { href: 'mailto:nowell@strite.org', label: 'Email', icon: 'email' },
+];
+---
+
+<Layout title="Nowell Strite — Technologist, Builder, Outdoor Enthusiast">
+  <Header currentPage="home" />
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-mountains"></div>
+    <div class="hero-content">
+      <p class="hero-location">Huntington, Vermont</p>
+      <h1 class="hero-title">Nowell Strite</h1>
+      <p class="hero-subtitle">Technologist, builder, outdoor enthusiast</p>
+      <div class="hero-links">
+        {links.map(link => (
+          <a href={link.href} class="hero-link" target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}>
+            {link.label} <span class="arrow">&rarr;</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Intro -->
+    <section class="intro container">
+      <p class="intro-text">
+        I've spent over two decades building web applications &mdash; from educational
+        platforms at PBS to healthcare tools to solar energy systems. Now I work
+        from the Green Mountains, writing code and exploring trails.
+      </p>
+    </section>
+
+    <!-- Experience -->
+    <section class="experience container">
+      <h2 class="section-label">The Journey</h2>
+      {experience.map(job => (
+        <div class="job">
+          <div class="job-header">
+            <h3 class="job-company">{job.company}</h3>
+            <span class="job-years">{job.years}</span>
+          </div>
+          <p class="job-role">{job.role}</p>
+          <p class="job-desc">{job.description}</p>
+        </div>
+      ))}
+      <a href="/resume" class="view-resume">
+        View full resume <span class="arrow">&rarr;</span>
+      </a>
+    </section>
+
+    <!-- Skills -->
+    <section class="skills container">
+      <h2 class="section-label">Toolkit</h2>
+      <div class="skills-grid">
+        {skills.map(group => (
+          <div class="skill-group">
+            <h3 class="skill-label">{group.label}</h3>
+            <p class="skill-items">{group.items}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #2d4a3e 0%, #1a3a2a 40%, #3d2b1f 100%);
+    color: white;
+    padding: 8rem 2rem 5rem;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-mountains {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: var(--color-cream);
+    clip-path: polygon(0% 100%, 8% 55%, 18% 75%, 30% 35%, 45% 65%, 55% 25%, 68% 50%, 80% 20%, 92% 55%, 100% 40%, 100% 100%);
+    opacity: 0.08;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .hero-location {
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-sage);
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.3rem;
+    color: var(--color-sand);
+    font-weight: 300;
+    margin-bottom: 2rem;
+  }
+
+  .hero-links {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .hero-link {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .hero-link:hover {
+    color: white;
+  }
+
+  .arrow {
+    display: inline-block;
+    transition: transform 0.2s;
+  }
+
+  .hero-link:hover .arrow {
+    transform: translateX(3px);
+  }
+
+  /* Intro */
+  .intro {
+    padding: 5rem 2rem;
+  }
+
+  .intro-text {
+    font-size: 1.3rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    border-left: 3px solid var(--color-earth);
+    padding-left: 1.5rem;
+    max-width: 700px;
+  }
+
+  /* Experience */
+  .experience {
+    padding: 0 2rem 4rem;
+  }
+
+  .job {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--color-warm-border);
+  }
+
+  .job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .job-company {
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  .job-years {
+    color: var(--color-earth);
+    font-size: 0.85rem;
+  }
+
+  .job-role {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+  }
+
+  .job-desc {
+    color: var(--color-text-light);
+    margin-top: 0.75rem;
+    line-height: 1.6;
+  }
+
+  .view-resume {
+    display: inline-block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-forest);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .view-resume:hover {
+    color: var(--color-earth);
+  }
+
+  .view-resume:hover .arrow {
+    transform: translateX(3px);
+  }
+
+  /* Skills */
+  .skills {
+    padding: 4rem 2rem;
+    border-top: 1px solid var(--color-warm-border);
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+  }
+
+  .skill-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .skill-items {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero {
+      padding: 6rem 1.25rem 3rem;
+      min-height: 60vh;
+    }
+
+    .intro {
+      padding: 3rem 1.25rem;
+    }
+
+    .intro-text {
+      font-size: 1.1rem;
+    }
+
+    .experience,
+    .skills {
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+  }
+</style>
